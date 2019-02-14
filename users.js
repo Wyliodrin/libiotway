@@ -28,6 +28,34 @@ module.exports = function (httpService)
             if (response.data && response.data.err === 0)
                 return response.data.user;
             return null;
-        }
+        },
+
+        sessions: async function (){
+            let response = await http.get ('/user/sessions');
+            if (response.data && response.data.err === 0)
+                return response.data.sessions;
+            return null;
+        },
+
+        edit: async function (params){
+            let response = await http.get ('/user/edit');
+            if (response.data && response.data.err === 0)
+                return true;
+            return false;
+        },
+
+        changePassword: async function (params){
+            let response = await http.get ('/user/password/edit');
+            if (response.data && response.data.err === 0)
+                return true;
+            return false;
+        },
+
+        deleteSession: async function (tokenId){
+            let response = await http.get ('/user/logout/'+tokenId);
+            if (response.data && response.data.err === 0)
+                return true;
+            return false;
+        },
     };
 }

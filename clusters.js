@@ -42,7 +42,7 @@ module.exports = function (http)
             return false;
         },
         
-        getWyliodrinJSON: async function (clusterId){
+        getProvisioningFile: async function (clusterId){
             let response = await http.get ('/cluster/provisioning_file/'+clusterId);
             if (response.data && response.data.err === 0){
                 return response.data.provisioningFile;
@@ -50,20 +50,36 @@ module.exports = function (http)
             return null;
         },
 
-        addScript: async function (params){
-            let response = await http.post ('/cluster/script/add/'+params.clusterId, params);
+        statisticsInstant: async function (clusterId){
+            let response = await http.get ('/cluster/statistics/instant/'+clusterId);
             if (response.data && response.data.err === 0){
-                return true;
+                return response.data.statistics;
             }
-            return false;
+            return null;
         },
 
-        delScript: async function (params){
-            let response = await http.post ('/cluster/script/del/'+params.clusterId, params);
+        statisticsTime: async function (params){
+            let response = await http.get ('/cluster/statistics/'+params.time+'/'+params.qty+'/'+params.clusterId);
             if (response.data && response.data.err === 0){
-                return true;
+                return response.data.statistics;
             }
-            return false;
+            return null;
         }
+
+        // addScript: async function (params){
+        //     let response = await http.post ('/cluster/script/add/'+params.clusterId, params);
+        //     if (response.data && response.data.err === 0){
+        //         return true;
+        //     }
+        //     return false;
+        // },
+
+        // delScript: async function (params){
+        //     let response = await http.post ('/cluster/script/del/'+params.clusterId, params);
+        //     if (response.data && response.data.err === 0){
+        //         return true;
+        //     }
+        //     return false;
+        // }
     };
 }

@@ -74,21 +74,21 @@ module.exports = function (http)
             return false;
         },
 
-        addParam: async function (params){
-            let response = await http.post ('/app/param/add/'+params.appId, params);
-            if (response.data && response.data.err === 0){
-                return true;
-            }
-            return false;
-        },
+        // addParam: async function (params){
+        //     let response = await http.post ('/app/param/add/'+params.appId, params);
+        //     if (response.data && response.data.err === 0){
+        //         return true;
+        //     }
+        //     return false;
+        // },
 
-        delParam: async function (params){
-            let response = await http.post ('/app/param/del/'+params.appId, params);
-            if (response.data && response.data.err === 0){
-                return true;
-            }
-            return false;
-        },
+        // delParam: async function (params){
+        //     let response = await http.post ('/app/param/del/'+params.appId, params);
+        //     if (response.data && response.data.err === 0){
+        //         return true;
+        //     }
+        //     return false;
+        // },
 
         deployerVersions: async function (platform){
             let response = await http.get ('/app/versions/deployer/'+platform);

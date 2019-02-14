@@ -58,7 +58,7 @@ module.exports = function (http)
             return false;
         },
 
-        getWyliodrinJSON: async function (productId){
+        getProvisioningFile: async function (productId){
             let response = await http.get ('/product/provisioning_file/'+productId);
             if (response.data && response.data.err === 0){
                 return response.data.provisioningFile;
@@ -66,21 +66,37 @@ module.exports = function (http)
             return null;
         },
 
-        addScript: async function (params){
-            let response = await http.post ('/product/script/add/'+params.productId, params);
+        statisticsInstant: async function (productId){
+            let response = await http.get ('/product/statistics/instant/'+productId);
             if (response.data && response.data.err === 0){
-                return true;
+                return response.data.statistics;
             }
-            return false;
+            return null;
         },
 
-        delScript: async function (params){
-            let response = await http.post ('/product/script/del/'+params.productId, params);
+        statisticsTime: async function (params){
+            let response = await http.get ('/product/statistics/'+params.time+'/'+params.qty+'/'+params.productId);
             if (response.data && response.data.err === 0){
-                return true;
+                return response.data.statistics;
             }
-            return false;
+            return null;
         },
+
+        // addScript: async function (params){
+        //     let response = await http.post ('/product/script/add/'+params.productId, params);
+        //     if (response.data && response.data.err === 0){
+        //         return true;
+        //     }
+        //     return false;
+        // },
+
+        // delScript: async function (params){
+        //     let response = await http.post ('/product/script/del/'+params.productId, params);
+        //     if (response.data && response.data.err === 0){
+        //         return true;
+        //     }
+        //     return false;
+        // },
 
         activate: async function (params){
             let response = await http.post ('/product/activate/'+params.productId, params);
