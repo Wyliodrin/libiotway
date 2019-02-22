@@ -2,34 +2,49 @@ module.exports = function (http){
     return {
         list: async function (appId){
             let response = await http.get ('/app/deployments/'+appId);
-            if (response.data && response.data.err === 0){
-                return response.data.deployments;
+            if (response.data)
+                return {
+                    err: response.data.err,
+                    deployments: response.data.deployments
+                };
+            return {
+                err: 'Invalid request'
             }
-            return null;
         },
 
         deploymentsProduct: async function (productId){
             let response = await http.get ('/app/deployments/product/'+productId);
-            if (response.data && response.data.err === 0){
-                return response.data.deploymentsProduct;
+            if (response.data)
+                return {
+                    err: response.data.err,
+                    deploymentsProduct: response.data.deploymentsProduct
+                };
+            return {
+                err: 'Invalid request'
             }
-            return null;
         },
 
         versions: async function (platform){
             let response = await http.get ('/app/versions/com.wyliodrin.deployer.'+platform);
-            if (response.data && response.data.err === 0){
-                return response.data.versions;
+            if (response.data)
+                return {
+                    err: response.data.err,
+                    versions: response.data.versions
+                };
+            return {
+                err: 'Invalid request'
             }
-            return null;
         },
 
         upgrade: async function (params){
             let response = await http.post ('/app/deploy/upgrade/'+params.deployId, {appId: params.appId});
-            if (response.data && response.data.err === 0){
-                return true;
+            if (response.data)
+                return {
+                    err: response.data.err
+                };
+            return {
+                err: 'Invalid request'
             }
-            return false;
         },
 
         edit: async function (params){
@@ -39,10 +54,13 @@ module.exports = function (http){
                 network: params.network,
                 parameters: params.parameters
             });
-            if (response.data && response.data.err === 0){
-                return true;
+            if (response.data)
+                return {
+                    err: response.data.err
+                };
+            return {
+                err: 'Invalid request'
             }
-            return false;
         },
         
         // addParam: async function (params){
@@ -63,8 +81,13 @@ module.exports = function (http){
 
         get: async function (deployId){
             let response = await http.get ('/app/deploy/'+deployId);
-            if (response.data && response.data.err === 0){
-                return response.data.deploy;
+            if (response.data)
+                return {
+                    err: response.data.err,
+                    deploy: response.data.deploy
+                };
+            return {
+                err: 'Invalid request'
             }
         }
     };

@@ -4,8 +4,13 @@ module.exports = function (http)
         get: async function (){
             let response = await http.get ('/settings');
             if (response.data)
-                return response.data;
-            return null;
+                return {
+                    err: response.data.err,
+                    settings: response.data
+                };
+            return {
+                err: 'Invalid request'
+            };
 
         }
     };

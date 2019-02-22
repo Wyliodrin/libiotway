@@ -5,12 +5,13 @@ module.exports = function (httpService)
     return {
         logout: async function (){
             let response = await http.get ('/user/logout');
-            if (response.data && response.data.err === 0){
-                return true;
-            }
-            else{
-                return false;
-            }
+            if (response.data)
+                return {
+                    err: response.data.err
+                };
+            return {
+                err: 'Invalid request'
+            };
         },
 
         login: async function (params){
@@ -18,44 +19,71 @@ module.exports = function (httpService)
             let response = await http.post ('/user/login', params);
             if (response.data && response.data.token){
                 httpService.setToken (response.data.token);
-                return response.data.token;
+                return {
+                    token: response.data.token,
+                    err: 0
+                };
             }
-            return null;
+            return {
+                err: 'Invalid request'
+            };
         },
 
         get: async function (){
             let response = await http.get ('/user');
-            if (response.data && response.data.err === 0)
-                return response.data.user;
-            return null;
+            if (response.data)
+                return {
+                    err: response.data.err,
+                    user: response.data.user
+                };
+            return {
+                err: 'Invalid request'
+            };
         },
 
         sessions: async function (){
             let response = await http.get ('/user/sessions');
-            if (response.data && response.data.err === 0)
-                return response.data.sessions;
-            return null;
+            if (response.data)
+                return {
+                    err: response.data.err,
+                    sessions: response.data.sessions
+                };
+            return {
+                err: 'Invalid request'
+            };
         },
 
         edit: async function (params){
             let response = await http.get ('/user/edit');
-            if (response.data && response.data.err === 0)
-                return true;
-            return false;
+            if (response.data)
+                return {
+                    err: response.data.err
+                };
+            return {
+                err: 'Invalid request'
+            };
         },
 
         changePassword: async function (params){
             let response = await http.get ('/user/password/edit');
-            if (response.data && response.data.err === 0)
-                return true;
-            return false;
+            if (response.data)
+                return {
+                    err: response.data.err
+                };
+            return {
+                err: 'Invalid request'
+            };
         },
 
         deleteSession: async function (tokenId){
             let response = await http.get ('/user/logout/'+tokenId);
-            if (response.data && response.data.err === 0)
-                return true;
-            return false;
+            if (response.data)
+                return {
+                    err: response.data.err
+                };
+            return {
+                err: 'Invalid request'
+            };
         },
     };
 }
