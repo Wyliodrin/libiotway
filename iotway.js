@@ -10,6 +10,7 @@ module.exports.init = function (endpoint, token){
     let deploy = require ('./deploy')(httpService.http);
     let settings = require ('./settings')(httpService.http);
     let projects = require ('./projects')(httpService.http);
+    let emulators = require ('./emulators')(httpService.http);
     if (token){
         httpService.setToken (token);
     }
@@ -20,7 +21,8 @@ module.exports.init = function (endpoint, token){
         apps: apps,
         deploy: deploy,
         settings: settings,
-        project: projects
+        project: projects,
+        emulators: emulators
     };
     return calls;
 }
