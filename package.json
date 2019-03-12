@@ -1,6 +1,6 @@
 {
   "name": "libiotway",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "API calls library for IoTWay",
   "main": "iotway.js",
   "scripts": {

@@ -6,7 +6,7 @@ module.exports = function (endpoint){
 
     function axiosInstance (endpoint){
         instance = axios.create({
-            baseURL: endpoint
+            baseURL: endpoint + '/api/v1'
           });
         // Add a request interceptor
         instance.interceptors.request.use(function (config) {

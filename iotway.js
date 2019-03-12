@@ -1,7 +1,6 @@
 let calls = null;
 
 module.exports.init = function (endpoint, token){
-    endpoint = endpoint + '/api/v1';
     let httpService = require ('./http')(endpoint);
     let users = require ('./users')(httpService);
     let clusters = require ('./clusters')(httpService.http);
