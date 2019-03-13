@@ -37,6 +37,9 @@ module.exports = function (endpoint){
         },
         setToken: function (tok){
             token = tok;
+        },
+        getToken: function (){
+            return token;
         }
     };
 }
