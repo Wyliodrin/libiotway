@@ -1,4 +1,14 @@
-let calls = null;
+//let calls = null;
+ calls =  { 
+    users: null,
+    clusters: null,
+    products: null,
+    apps: null,
+    deploy: null,
+    settings: null,
+    project: null,
+    emulators: null
+};
 let httpService = null;
 
 function setCalls(endpoint){
@@ -31,7 +41,7 @@ function initWithToken(){
     setCalls(endpoint);
     httpService.setToken(token);
    
-    return calls;
+    //return calls;
 }
 
 async function initWithLogin(){
@@ -47,21 +57,25 @@ async function initWithLogin(){
     }
     let token = await calls.users.login(params);
     httpService.setToken(token);
-    return calls;
+    //return calls;
 }
 
 module.exports.init = async function (){
     if(arguments.length === 2){
-        let calls = await initWithToken(arguments[0], arguments[1]);
+        await initWithToken(arguments[0], arguments[1]);
         return calls;
     }
 
     if(arguments.length === 3){
-        let calls = await initWithLogin(arguments[0], arguments[1], arguments[2]);
+        await initWithLogin(arguments[0], arguments[1], arguments[2]);
         return calls;
     }
 
     throw new Error ('Invalid number of parameters for init.');
+}
+
+module.exports.get = function (){
+    return calls;
 }
 
 module.exports.getToken = function(){

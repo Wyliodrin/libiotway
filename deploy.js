@@ -5,6 +5,7 @@ module.exports = function (http){
             if (response.data){
                 if (response.data.err)
                     throw new Error (response.data.err);
+                    
                 return response.data.deployments;
             }
             throw new Error ('invalid request');
@@ -25,16 +26,19 @@ module.exports = function (http){
             if (response.data){
                 if (response.data.err)
                     throw new Error (response.data.err);
+            
                 return response.data.versions;
             }
+    
             throw new Error ('invalid request');
         },
 
         upgrade: async function (params){
-            let response = await http.post ('/app/deploy/upgrade/'+params.deployId, {appId: params.appId});
+            let response = await http.post ('/app/deploy/upgrade/'+ params.deployId, {appId: params.appId});
             if (response.data){
                 if (response.data.err)
                     throw new Error (response.data.err);
+                return response.data;
             }
             throw new Error ('invalid request');
         },
@@ -70,6 +74,7 @@ module.exports = function (http){
         // },
 
         get: async function (deployId){
+        
             let response = await http.get ('/app/deploy/'+deployId);
             if (response.data){
                 if (response.data.err)

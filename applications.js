@@ -1,88 +1,98 @@
-module.exports = function (http)
-{
+module.exports = function (http) {
     return {
-        list: async function (){
-            let response = await http.get ('/app/list/');
-            if (response.data){
+        list: async function () {
+            let response = await http.get('/app/list/');
+            if (response.data) {
                 if (!response.data.err)
                     return response.data.applications;
-                throw new Error (response.data.err);
+                throw new Error(response.data.err);
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        versions: async function (appId){
-            let response = await http.get ('/app/versions/'+appId);
-            if (response.data){
+        versions: async function (appId) {
+            let response = await http.get('/app/versions/' + appId);
+            if (response.data) {
                 if (!response.data.err)
                     return response.data.versions;
-                throw new Error (response.data.err);
+                throw new Error(response.data.err);
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        editVersion: async function (appId, version, params){
-            let response = await http.post ('/app/version/'+appId+'/'+version, params);
-            if (response.data){
+        editVersion: async function (appId, version, params) {
+            let response = await http.post('/app/version/' + appId + '/' + version, params);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            console.log(appId)
+            throw new Error('invalid request');
         },
 
-        new: async function (params){
-            let response = await http.post ('/app/create', params);
-            if (response.data){
+        new: async function (params) {
+            let response = await http.post('/app/create', params);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        get: async function (appId){
-            let response = await http.get ('/app/list/'+appId);
-            if (response.data){
+        get: async function (appId) {
+            let response = await http.get('/app/list/' + appId);
+            if (response.data) {
                 if (!response.data.err)
                     return response.data.application;
-                throw new Error (response.data.err);
+                throw new Error(response.data.err);
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        deploy: async function (params){
-            let response = await http.post ('/app/deploy/'+params.appId, params);
-            if (response.data){
+        deploy: async function (params) {
+            let response = await http.post('/app/deploy/' + params.appId, params);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        undeploy: async function (deployId){
-            let response = await http.post ('/app/undeploy/'+deployId);
-            if (response.data){
+        undeploy: async function (params) {
+            console.log('undeploy')
+            console.log(params)
+            console.log('/app/undeploy/' + params.appId)
+            let response = await http.post('/app/undeploy/' + params.appId, params);
+            //console.log(response)
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        edit: async function (params){
-            let response = await http.post ('/app/edit/'+params.appId, params);
-            if (response.data){
+        edit: async function (params) {
+            let response = await http.post('/app/edit/' + params.appId, params);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        delete: async function (appId){
-            let response = await http.post ('/app/remove/'+appId);
-            if (response.data){
+        delete: async function (appId) {
+            let response = await http.post('/app/remove/' + appId);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
         // addParam: async function (params){
@@ -101,14 +111,14 @@ module.exports = function (http)
         //     return false;
         // },
 
-        deployerVersions: async function (platform){
-            let response = await http.get ('/app/versions/deployer/'+platform);
-            if (response.data){
+        deployerVersions: async function (platform) {
+            let response = await http.get('/app/versions/deployer/' + platform);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
                 return response.data.versions;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         }
     };
 }

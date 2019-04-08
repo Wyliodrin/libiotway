@@ -5,9 +5,11 @@ module.exports = function (endpoint){
     let token = null;
 
     function axiosInstance (endpoint){
+        
         instance = axios.create({
             baseURL: endpoint + '/api/v1'
           });
+         
         // Add a request interceptor
         instance.interceptors.request.use(function (config) {
             // Do something before request is sent
@@ -15,7 +17,7 @@ module.exports = function (endpoint){
                 config.headers.Authorization = 'Bearer ' + token;
             return config;
         });
-    
+        
         instance.interceptors.response.use((response) => {
             return response;
         }, function (error) {
@@ -29,11 +31,14 @@ module.exports = function (endpoint){
     }
 
     httpInstance = axiosInstance (endpoint);
+    //console.log(httpInstance.post)
 
     return {
         http: httpInstance,
         setEndpoint: function (endpoint){
+    
             httpInstance = axiosInstance (endpoint);
+    
         },
         setToken: function (tok){
             token = tok;

@@ -1,7 +1,8 @@
 module.exports = function (httpService)
-{
+{   
+    //console.log(httpService)
     let http = httpService.http;
-    
+
     return {
         logout: async function (){
             let response = await http.get ('/user/logout');
@@ -13,7 +14,9 @@ module.exports = function (httpService)
         },
 
         login: async function (params){
+        
             httpService.setEndpoint (params.host);
+        
             let response = await http.post ('/user/login', params);
             if (response.data && response.data.token){
                 httpService.setToken (response.data.token);

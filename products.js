@@ -1,99 +1,113 @@
-module.exports = function (http)
-{
+module.exports = function (http) {
     return {
-        list: async function (clusterId){
-            let response = await http.get ('/product/list/'+clusterId);
-            if (response.data){
+        list: async function (clusterId) {
+            let response = await http.get('/product/list/' + clusterId);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
                 return response.data.products;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        get: async function (productId){
-            let response = await http.get ('/product/get/'+productId);
-            if (response.data){
+        get: async function (productId) {
+            let response = await http.get('/product/get/' + productId);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
                 return response.data.product;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        provision: async function (params){
-            let response = await http.post ('/product/provision', params);
-            if (response.data){
+        logs: async function (productId) {
+            let response = await http.get('/product/logs/' + productId);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data.logs;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        delete: async function (productId){
-            let response = await http.get ('/product/delete/'+productId);
-            if (response.data){
+        provision: async function (params) {
+            let response = await http.post('/product/provision', params);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        schedule: async function (params){
-            let response = await http.get ('/product/schedule/'+params.productId+'/'+params.action);
-            if (response.data){
+        delete: async function (productId) {
+            let response = await http.get('/product/delete/' + productId);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        unschedule: async function (params){
-            let response = await http.get ('/product/unschedule/'+params.productId+'/'+params.action);
-            if (response.data){
+        schedule: async function (params) {
+            let response = await http.get('/product/schedule/' + params.productId + '/' + params.action);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        edit: async function (params){
-            let response = await http.post ('/product/edit/'+params.productId, params);
-            if (response.data){
+        unschedule: async function (params) {
+            let response = await http.get('/product/unschedule/' + params.productId + '/' + params.action);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        getProvisioningFile: async function (productId){
-            let response = await http.get ('/product/provisioning_file/'+productId);
-            if (response.data){
+        edit: async function (params) {
+            let response = await http.post('/product/edit/' + params.productId, params);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
+            }
+            throw new Error('invalid request');
+        },
+
+        getProvisioningFile: async function (productId) {
+            let response = await http.get('/product/provisioning_file/' + productId);
+            if (response.data) {
+                if (response.data.err)
+                    throw new Error(response.data.err);
                 return response.data.provisioningFile;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        statisticsInstant: async function (productId){
-            let response = await http.get ('/product/statistics/instant/'+productId);
-            if (response.data){
+        statisticsInstant: async function (productId) {
+            let response = await http.get('/product/statistics/instant/' + productId);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
                 return response.data.statistics;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
-        statisticsTime: async function (params){
-            let response = await http.get ('/product/statistics/'+params.time+'/'+params.qty+'/'+params.productId);
-            if (response.data){
+        statisticsTime: async function (params) {
+            let response = await http.get('/product/statistics/' + params.time + '/' + params.qty + '/' + params.productId);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
                 return response.data.statistics;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
         // addScript: async function (params){
@@ -112,13 +126,14 @@ module.exports = function (http)
         //     return false;
         // },
 
-        activate: async function (params){
-            let response = await http.post ('/product/activate/'+params.productId, params);
-            if (response.data){
+        activate: async function (params) {
+            let response = await http.post('/product/activate/' + params.productId, params);
+            if (response.data) {
                 if (response.data.err)
-                    throw new Error (response.data.err);
+                    throw new Error(response.data.err);
+                return response.data;
             }
-            throw new Error ('invalid request');
+            throw new Error('invalid request');
         },
 
         actions: ['restart', 'distribute']

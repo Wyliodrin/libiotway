@@ -7,6 +7,7 @@ module.exports = function (http){
                     throw new Error (response.data.err);
                 return response.data.projects;
             }
+            console.log('de aici sare')
             throw new Error ('invalid request');
         },
 
@@ -17,6 +18,7 @@ module.exports = function (http){
                     throw new Error (response.data.err);
                 return response.data.project;
             }
+            
             throw new Error ('invalid request');
         }
     }
