@@ -22,12 +22,12 @@ module.exports = function (http) {
 
         editVersion: async function (appId, version, params) {
             let response = await http.post('/app/version/' + appId + '/' + version, params);
+            
             if (response.data) {
                 if (response.data.err)
                     throw new Error(response.data.err);
                 return response.data;
             }
-            console.log(appId)
             throw new Error('invalid request');
         },
 
@@ -62,9 +62,9 @@ module.exports = function (http) {
         },
 
         undeploy: async function (params) {
-            console.log('undeploy')
-            console.log(params)
-            console.log('/app/undeploy/' + params.appId)
+            //console.log('undeploy')
+            //console.log(params)
+            //console.log('/app/undeploy/' + params.appId)
             let response = await http.post('/app/undeploy/' + params.appId, params);
             //console.log(response)
             if (response.data) {

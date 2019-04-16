@@ -38,6 +38,7 @@ module.exports = function (http){
             if (response.data){
                 if (response.data.err)
                     throw new Error (response.data.err);
+               
                 return response.data;
             }
             throw new Error ('invalid request');
@@ -53,6 +54,7 @@ module.exports = function (http){
             if (response.data){
                 if (response.data.err)
                     throw new Error (response.data.err);
+                return response.data;
             }
             throw new Error ('invalid request');
         },

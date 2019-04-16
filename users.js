@@ -4,6 +4,7 @@ module.exports = function (httpService)
     let http = httpService.http;
 
     return {
+    
         logout: async function (){
             let response = await http.get ('/user/logout');
             if (response.data){
@@ -25,7 +26,7 @@ module.exports = function (httpService)
             throw new Error ('invalid request');
         },
 
-        //am ramas aici
+ 
         get: async function (){
             let response = await http.get ('/user');
             if (response.data){
